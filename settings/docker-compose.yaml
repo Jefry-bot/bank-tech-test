@@ -1,0 +1,99 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bank
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d/
+    networks:
+      - bank
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d bank"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  service-registry:
+    build:
+      context: ..
+      dockerfile: context/service/service-registry/Dockerfile
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - bank
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  service-client:
+    build:
+      context: ..
+      dockerfile: context/service/service-client/Dockerfile
+    container_name: service-client
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_HOST=postgres:5432
+      - LB_EUREKA=http://service-registry:8761
+    depends_on:
+      postgres:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+    networks:
+      - bank
+
+  service-finance:
+    build:
+      context: ..
+      dockerfile: context/service/service-finance/Dockerfile
+    container_name: service-finance
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=postgres:5432
+      - LB_EUREKA=http://service-registry:8761
+    depends_on:
+      postgres:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+    networks:
+      - bank
+
+  kafka-server:
+    image: bitnami/kafka:latest
+    hostname: kafka-server
+    container_name: kafka-server
+
+    ports:
+      - '9092:9092'
+      - '9093:9093'
+    environment:
+      KAFKA_CFG_NODE_ID: '0'
+      KAFKA_CFG_PROCESS_ROLES: 'controller,broker'
+      KAFKA_CFG_LISTENERS: 'PLAINTEXT://:9092,CONTROLLER://:9093'
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT'
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: '0@kafka-server:9093'
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+    networks:
+      - bank
+
+volumes:
+  data-postgres:
+    name: data-postgres
+
+networks:
+  bank:
+    name: bank-network

@@ -1,0 +1,9 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.security:spring-security-core'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+tasks.named('bootJar') { enabled = false }
+
+tasks.named('jar') { enabled = true }
