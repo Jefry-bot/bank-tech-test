@@ -9,9 +9,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class EntityBaseDomain {
-
-  protected Long id;
+public class DocumentBaseDomain {
+  protected String id;
   protected LocalDateTime createdAt;
   protected LocalDateTime updatedAt;
   @Builder.Default protected boolean status = true;

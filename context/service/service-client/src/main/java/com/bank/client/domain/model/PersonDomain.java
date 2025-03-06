@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class PersonDomain extends EntityBaseDomain {
+public class PersonDomain extends DocumentBaseDomain {
 
   protected String name;
   protected Integer age;

@@ -3,35 +3,35 @@ package com.bank.client.infrastructure.output.adapter.persistence.repository;
 import com.bank.client.application.output.port.ClientOutputPort;
 import com.bank.client.domain.model.ClientDomain;
 import com.bank.client.infrastructure.output.adapter.persistence.mapper.MapStructClientPersistenceMapper;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Repository
 @RequiredArgsConstructor
 public class ClientRepositoryImpl implements ClientOutputPort {
 
-  private final ClientJpaRepository repository;
+  private final ClientReactiveRepository repository;
   private final MapStructClientPersistenceMapper mapper;
 
   @Override
-  public List<ClientDomain> findAll() {
-    return mapper.toDomain(repository.findAll());
+  public Flux<ClientDomain> findAll() {
+    return repository.findAll().map(mapper::toDomain);
   }
 
   @Override
-  public Optional<ClientDomain> findById(Long id) {
+  public Mono<ClientDomain> findById(String id) {
     return repository.findById(id).map(mapper::toDomain);
   }
 
   @Override
-  public ClientDomain save(ClientDomain client) {
-    return mapper.toDomain(repository.save(mapper.toEntity(client)));
+  public Mono<ClientDomain> save(ClientDomain client) {
+    return repository.save(mapper.toCollection(client)).map(mapper::toDomain);
   }
 
   @Override
-  public void deleteById(Long id) {
-    repository.deleteById(id);
+  public Mono<Void> deleteById(String id) {
+    return repository.deleteById(id);
   }
 }

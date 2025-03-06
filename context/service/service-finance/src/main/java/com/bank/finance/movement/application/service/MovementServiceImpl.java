@@ -1,21 +1,15 @@
 package com.bank.finance.movement.application.service;
 
-import static com.bank.finance.movement.domain.model.MovementType.ADD;
-import static com.bank.finance.movement.domain.model.MovementType.SUBTRACT;
 
 import com.bank.finance.account.domain.model.AccountDomain;
 import com.bank.finance.client.application.input.port.ClientInputPort;
 import com.bank.finance.movement.application.input.port.MovementInputPort;
 import com.bank.finance.movement.application.input.port.TransactionInputPort;
 import com.bank.finance.movement.application.output.port.MovementOutputPort;
-import com.bank.finance.movement.domain.exception.InvalidBalanceException;
 import com.bank.finance.movement.domain.exception.MovementNotFoundException;
 import com.bank.finance.movement.domain.model.MovementDomain;
-import java.time.LocalDate;
-import java.util.List;
-
 import com.bank.finance.notification.application.input.port.NotificationInputPort;
-import com.bank.finance.notification.application.service.NotificationServiceImpl;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
