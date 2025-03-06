@@ -7,6 +7,8 @@ import com.bank.client.domain.model.ClientDomain;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -15,22 +17,22 @@ public class ClientServiceImpl implements ClientInputPort {
   private final ClientOutputPort outputPort;
 
   @Override
-  public List<ClientDomain> findAll() {
+  public Flux<ClientDomain> findAll() {
     return outputPort.findAll();
   }
 
   @Override
-  public ClientDomain findById(Long id) {
-    return outputPort.findById(id).orElseThrow(ClientNotFoundException::new);
+  public Mono<ClientDomain> findById(String id) {
+    return outputPort.findById(id).switchIfEmpty(Mono.error(ClientNotFoundException::new));
   }
 
   @Override
-  public ClientDomain save(ClientDomain client) {
+  public Mono<ClientDomain> save(ClientDomain client) {
     return outputPort.save(client);
   }
 
   @Override
-  public void deleteById(Long id) {
-    outputPort.deleteById(id);
+  public Mono<Void> deleteById(String id) {
+    return outputPort.deleteById(id);
   }
 }

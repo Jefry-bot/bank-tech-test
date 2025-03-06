@@ -1,7 +1,7 @@
 package com.bank.client.infrastructure.output.adapter.persistence.repository;
 
 import com.bank.client.domain.model.ClientDomain;
-import com.bank.client.infrastructure.output.adapter.persistence.entity.ClientEntity;
+import com.bank.client.infrastructure.output.adapter.persistence.entity.ClientDocument;
 import com.bank.client.infrastructure.output.adapter.persistence.mapper.MapStructClientPersistenceMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,18 +20,18 @@ import static org.mockito.Mockito.*;
 @DisplayName("Test suite for ClientRepositoryImpl.")
 class ClientRepositoryImplTest {
 
-  @Mock private ClientJpaRepository repository;
+  @Mock private ClientReactiveRepository repository;
   @Mock private MapStructClientPersistenceMapper mapper;
   @InjectMocks private ClientRepositoryImpl repositoryImpl;
 
   @Test
   @DisplayName("should return data successfully.")
   void shouldReturnDataSuccessfullyTest() {
-      ClientEntity entity = mock(ClientEntity.class);
+      ClientDocument entity = mock(ClientDocument.class);
       ClientDomain domain = mock(ClientDomain.class);
 
       List<ClientDomain> domains = List.of(domain);
-      List<ClientEntity> entities = List.of(entity);
+      List<ClientDocument> entities = List.of(entity);
 
       when(repository.findAll()).thenReturn(entities);
       when(mapper.toDomain(entities)).thenReturn(domains);
@@ -44,7 +44,7 @@ class ClientRepositoryImplTest {
   @DisplayName("should return client by id successfully")
   void shouldReturnClientByIdSuccessfullyTest() {
       Long id = 1L;
-      ClientEntity entity = mock(ClientEntity.class);
+      ClientDocument entity = mock(ClientDocument.class);
       ClientDomain domain = mock(ClientDomain.class);
 
       when(domain.getId()).thenReturn(id);
@@ -63,7 +63,7 @@ class ClientRepositoryImplTest {
   @DisplayName("should save client successfully")
   void shouldSaveClientSuccessfullyTest() {
       Long id = 1L;
-      ClientEntity entity = mock(ClientEntity.class);
+      ClientDocument entity = mock(ClientDocument.class);
       ClientDomain domain = mock(ClientDomain.class);
 
       when(entity.getId()).thenReturn(id);

@@ -10,12 +10,12 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class IsValidClientByIdValidator implements ConstraintValidator<IsValidClient, Long> {
+public class IsValidClientByIdValidator implements ConstraintValidator<IsValidClient, String> {
 
   private final ClientInputPort inputPort;
 
   @Override
-  public boolean isValid(Long value, ConstraintValidatorContext context) {
+  public boolean isValid(String value, ConstraintValidatorContext context) {
     if (isNull(value)) {
       return true;
     }
