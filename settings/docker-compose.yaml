@@ -20,6 +20,35 @@ services:
       timeout: 5s
       retries: 5
 
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - data-redis:/data
+    command: redis-server --requirepass redispassword
+    networks:
+      - bank
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redispassword", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   service-registry:
     build:
       context: ..
@@ -93,6 +122,10 @@ services:
 volumes:
   data-postgres:
     name: data-postgres
+  data-redis:
+    name: data-redis
+  data-mongo:
+    name: data-mongo
 
 networks:
   bank:

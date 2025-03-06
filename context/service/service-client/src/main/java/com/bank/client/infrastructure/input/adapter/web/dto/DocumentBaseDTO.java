@@ -3,15 +3,16 @@ package com.bank.client.infrastructure.input.adapter.web.dto;
 import java.time.LocalDateTime;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class EntityBaseDTO {
+public class DocumentBaseDTO {
 
-    protected Long id;
+    protected String id;
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
     @Builder.Default

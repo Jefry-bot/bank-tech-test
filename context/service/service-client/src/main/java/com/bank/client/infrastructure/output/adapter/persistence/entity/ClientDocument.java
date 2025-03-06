@@ -1,19 +1,14 @@
 package com.bank.client.infrastructure.output.adapter.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Setter
 @Getter
-@Entity
-@Table(name = "CLIENT")
-public class ClientEntity extends PersonEntity {
-
-  @Column(name = "PASSWORD")
+@Document(collection = "CLIENT")
+public class ClientDocument extends PersonDocument {
   private String password;
 
   @Override

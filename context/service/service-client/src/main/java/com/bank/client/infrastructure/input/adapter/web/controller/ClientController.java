@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @Validated
 @RestController
@@ -23,22 +24,24 @@ public class ClientController {
   private final MapStructClientWebMapper mapper;
 
   @GetMapping
-  public Response<List<ClientDTO>> findAll() {
-    return success(mapper.toDto(inputPort.findAll()));
+  public Mono<Response<List<ClientDTO>>> findAll() {
+    return inputPort.findAll().collectList().map(list -> success(mapper.toDto(list)));
   }
 
   @GetMapping("/{id}")
-  public Response<ClientDTO> findById(@PathVariable Long id) {
-    return success(mapper.toDto(inputPort.findById(id)));
+  public Mono<Response<ClientDTO>> findById(@PathVariable String id) {
+    return inputPort.findById(id).map(client -> success(mapper.toDto(client)));
   }
 
   @PostMapping
-  public Response<ClientDTO> save(@RequestBody @Valid ClientDTO clientDTO) {
-    return success(mapper.toDto(inputPort.save(mapper.toDomain(clientDTO))));
+  public Mono<Response<ClientDTO>> save(@RequestBody @Valid ClientDTO clientDTO) {
+    return inputPort
+        .save(mapper.toDomain(clientDTO))
+        .map(clientSave -> success(mapper.toDto(clientSave)));
   }
 
   @DeleteMapping("/{id}")
-  public Response<String> deleteById(@PathVariable @IsValidClient Long id) {
-    return success(() -> inputPort.deleteById(id));
+  public Mono<Response<String>> deleteById(@PathVariable @IsValidClient String id) {
+    return inputPort.deleteById(id).thenReturn(success(() -> {}));
   }
 }

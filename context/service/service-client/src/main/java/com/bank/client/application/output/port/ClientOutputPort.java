@@ -1,16 +1,16 @@
 package com.bank.client.application.output.port;
 
 import com.bank.client.domain.model.ClientDomain;
-import java.util.List;
-import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface ClientOutputPort {
 
-  List<ClientDomain> findAll();
+  Flux<ClientDomain> findAll();
 
-  Optional<ClientDomain> findById(Long id);
+  Mono<ClientDomain> findById(String id);
 
-  ClientDomain save(ClientDomain client);
+  Mono<ClientDomain> save(ClientDomain client);
 
-  void deleteById(Long id);
+  Mono<Void> deleteById(String id);
 }

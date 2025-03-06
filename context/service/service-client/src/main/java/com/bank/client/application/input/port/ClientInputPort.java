@@ -1,15 +1,16 @@
 package com.bank.client.application.input.port;
 
 import com.bank.client.domain.model.ClientDomain;
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface ClientInputPort {
 
-  List<ClientDomain> findAll();
+  Flux<ClientDomain> findAll();
 
-  ClientDomain findById(Long id);
+  Mono<ClientDomain> findById(String id);
 
-  ClientDomain save(ClientDomain client);
+  Mono<ClientDomain> save(ClientDomain client);
 
-  void deleteById(Long id);
+  Mono<Void> deleteById(String id);
 }
