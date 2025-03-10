@@ -9,9 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/context/service/service-alert" />
             <option value="$PROJECT_DIR$/context/service/service-client" />
             <option value="$PROJECT_DIR$/context/service/service-finance" />
-            <option value="$PROJECT_DIR$/context/service/service-notification" />
             <option value="$PROJECT_DIR$/context/service/service-registry" />
             <option value="$PROJECT_DIR$/context/shared/common" />
           </set>

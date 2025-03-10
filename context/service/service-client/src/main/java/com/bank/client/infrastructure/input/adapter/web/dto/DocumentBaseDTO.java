@@ -3,7 +3,6 @@ package com.bank.client.infrastructure.input.adapter.web.dto;
 import java.time.LocalDateTime;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.bson.types.ObjectId;
 
 @Getter
 @Setter

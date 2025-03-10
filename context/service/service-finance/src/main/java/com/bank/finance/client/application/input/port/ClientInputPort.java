@@ -4,5 +4,5 @@ import com.bank.finance.client.domain.model.ClientDomain;
 
 public interface ClientInputPort {
 
-    ClientDomain findById(Long id);
+    ClientDomain findById(String id);
 }

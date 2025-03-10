@@ -1,7 +1,7 @@
 package com.bank.finance.client.infrastructure.output.adapter.client.mapper;
 
 import com.bank.finance.client.domain.model.ClientDomain;
-import com.bank.finance.shared.infrastructure.input.adapter.web.dto.ClientDTO;
+import com.bank.finance.client.infrastructure.output.adapter.client.dto.ClientDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 

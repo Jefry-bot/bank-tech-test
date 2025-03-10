@@ -1,6 +1,5 @@
 package com.bank.finance.client.domain.model;
 
-import com.bank.finance.shared.domain.model.EntityBaseDomain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class PersonDomain extends EntityBaseDomain {
+public class PersonDomain extends DocumentBaseDomain {
 
   protected String name;
   protected Integer age;

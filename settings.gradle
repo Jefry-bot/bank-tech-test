@@ -4,5 +4,5 @@ include ':common'; project(':common').projectDir = new File('context/shared/comm
 include ':service-client'; project(':service-client').projectDir = new File('context/service/service-client')
 include ':service-finance'; project(':service-finance').projectDir = new File('context/service/service-finance')
 include ':service-registry'; project(':service-registry').projectDir = new File('context/service/service-registry')
-include ':service-notification'; project(':service-notification').projectDir = new File('context/service/service-notification')
+include ':service-alert'; project(':service-alert').projectDir = new File('context/service/service-alert')
 

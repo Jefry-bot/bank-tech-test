@@ -16,7 +16,7 @@ public class FeignClientAdapterImpl implements ClientOutputPort {
   private final MapStructClientMapper mapper;
 
   @Override
-  public Optional<ClientDomain> findById(Long id) {
+  public Optional<ClientDomain> findById(String id) {
     return Optional.of(client.findById(id).getData()).map(mapper::toDomain);
   }
 }
