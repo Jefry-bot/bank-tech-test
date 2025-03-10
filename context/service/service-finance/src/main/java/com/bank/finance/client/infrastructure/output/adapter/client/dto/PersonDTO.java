@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class PersonDTO extends EntityBaseDTO {
+public class PersonDTO extends DocumentBaseDTO {
 
   protected Integer age;
   protected String phone;

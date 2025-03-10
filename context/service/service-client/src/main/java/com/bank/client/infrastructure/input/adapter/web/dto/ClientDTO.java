@@ -14,4 +14,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(builderMethodName = "init")
 public class ClientDTO extends PersonDTO {
   @NotNull private String password;
+  @NotNull private String email;
 }

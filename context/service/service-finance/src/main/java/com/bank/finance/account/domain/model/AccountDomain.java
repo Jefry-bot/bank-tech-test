@@ -8,19 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class AccountDomain extends EntityBaseDomain implements Serializable {
-  @Serial
-  private static final long serialVersionUID = 1L;
+public class AccountDomain extends EntityBaseDomain {
 
-  private Long clientId;
+  private String clientId;
   private AccountType type;
   private Long accountNumber;
   private ClientDomain client;

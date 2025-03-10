@@ -1,7 +1,5 @@
 package com.bank.finance.client.infrastructure.output.adapter.client.dto;
 
-import com.bank.finance.client.domain.model.Gender;
-import com.bank.finance.shared.infrastructure.input.adapter.web.dto.EntityBaseDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(builderMethodName = "init")
-public class ClientDTO extends EntityBaseDTO {
+public class ClientDTO extends PersonDTO {
     @NotNull private String password;
-    private Integer age;
-    private String phone;
-    private Gender gender;
-    private String address;
-    @NotNull private String name;
-    private String identification;
+    @NotNull private String email;
 }

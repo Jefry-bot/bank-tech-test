@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ReportInputPort {
 
-    List<AccountStatement> getAccountStatement(Long client, LocalDate start, LocalDate end);
+    List<AccountStatement> getAccountStatement(String client, LocalDate start, LocalDate end);
 }

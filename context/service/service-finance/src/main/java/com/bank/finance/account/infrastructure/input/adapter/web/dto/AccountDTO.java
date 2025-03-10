@@ -1,8 +1,8 @@
 package com.bank.finance.account.infrastructure.input.adapter.web.dto;
 
 import com.bank.finance.account.domain.model.AccountType;
+import com.bank.finance.client.infrastructure.output.adapter.validation.IsValidClient;
 import com.bank.finance.shared.infrastructure.input.adapter.web.dto.EntityBaseDTO;
-import com.bank.finance.shared.infrastructure.output.adapter.validation.IsValidClient;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +18,8 @@ import lombok.experimental.SuperBuilder;
 public class AccountDTO extends EntityBaseDTO {
 
   private Long id;
-  @NotNull @IsValidClient private Long clientId;
+  @NotNull @IsValidClient
+  private String clientId;
   @NotNull private AccountType type;
   @NotNull private Long accountNumber;
   @NotNull private Double openingBalance;

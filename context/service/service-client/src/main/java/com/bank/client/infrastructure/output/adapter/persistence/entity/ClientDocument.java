@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "CLIENT")
 public class ClientDocument extends PersonDocument {
   private String password;
+  private String email;
 
   @Override
   @Generated

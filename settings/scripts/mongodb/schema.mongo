@@ -1,0 +1,59 @@
+use client_db;
+
+db.createCollection("CLIENT", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "identification", "password", "email"],
+            properties: {
+                name: {
+                    bsonType: "string",
+                    description: "Debe ser una cadena y es obligatorio."
+                },
+                gender: {
+                    bsonType: "string",
+                    enum: ["MALE", "FEMALE", "OTHER"],
+                    description: "Debe ser uno de los valores: MALE, FEMALE, OTHER."
+                },
+                age: {
+                    bsonType: "int",
+                    minimum: 0,
+                    description: "Debe ser un número entero no negativo."
+                },
+                identification: {
+                    bsonType: "string",
+                    description: "Debe ser una cadena y es obligatorio."
+                },
+                address: {
+                    bsonType: "string",
+                    description: "Debe ser una cadena."
+                },
+                phone: {
+                    bsonType: "string",
+                    description: "Debe ser una cadena."
+                },
+                password: {
+                    bsonType: "string",
+                    description: "Debe ser una cadena y es obligatorio."
+                },
+                email: {
+                    bsonType: "string",
+                    pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+                    description: "Debe ser una cadena con formato de correo electrónico y es obligatorio."
+                },
+                createdAt: {
+                    bsonType: "date",
+                    description: "Debe ser una fecha."
+                },
+                updatedAt: {
+                    bsonType: "date",
+                    description: "Debe ser una fecha."
+                },
+                status: {
+                    bsonType: "bool",
+                    description: "Debe ser un booleano."
+                }
+            }
+        }
+    }
+})

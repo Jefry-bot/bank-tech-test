@@ -14,7 +14,7 @@ public class ClientServiceImpl implements ClientInputPort {
   private final ClientOutputPort outputPort;
 
   @Override
-  public ClientDomain findById(Long id) {
+  public ClientDomain findById(String id) {
     return outputPort.findById(id).orElseThrow(ClientNotFoundException::new);
   }
 }

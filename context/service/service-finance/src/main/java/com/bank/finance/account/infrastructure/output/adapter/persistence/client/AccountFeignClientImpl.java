@@ -12,7 +12,7 @@ public class AccountFeignClientImpl implements AccountClientOutputPort {
   private final ClientInputPort inputPort;
 
   @Override
-  public ClientDomain validIfExistClient(Long id) {
+  public ClientDomain validIfExistClient(String id) {
     return inputPort.findById(id);
   }
 }
