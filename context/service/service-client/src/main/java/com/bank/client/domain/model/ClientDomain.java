@@ -13,4 +13,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(builderMethodName = "init")
 public class ClientDomain extends PersonDomain {
   private String password;
+  private String email;
 }

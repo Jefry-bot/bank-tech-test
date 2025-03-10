@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${USERNAME_MAIL}
+    password: ${KEY_MAIL}
+    properties:
+      mail.smtp.starttls.enable: true
+      mail.smtp.auth: true
+  application:
+    name: service-notification
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    template:
+      default-topic: notifications
+
+mail:
+  templates:
+    client: client.html

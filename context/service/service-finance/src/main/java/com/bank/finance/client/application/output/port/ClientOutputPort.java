@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface ClientOutputPort {
 
-    Optional<ClientDomain> findById(Long id);
+    Optional<ClientDomain> findById(String id);
 }

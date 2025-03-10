@@ -5,17 +5,16 @@ import static java.util.Objects.nonNull;
 
 import com.bank.finance.account.application.output.port.AccountClientOutputPort;
 import com.bank.finance.account.domain.exception.ClientNotFoundException;
-import com.bank.finance.shared.infrastructure.output.adapter.validation.IsValidClient;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class IsValidClientByIdValidator implements ConstraintValidator<IsValidClient, Long> {
+public class IsValidClientByIdValidator implements ConstraintValidator<IsValidClient, String> {
   private final AccountClientOutputPort outputPort;
 
   @Override
-  public boolean isValid(Long value, ConstraintValidatorContext context) {
+  public boolean isValid(String value, ConstraintValidatorContext context) {
     if (isNull(value)) {
       return true;
     }

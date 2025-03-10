@@ -29,7 +29,7 @@ public class AccountEntity extends EntityBase {
   private Double openingBalance;
 
   @Column(name = "CLIENT_ID")
-  private Long clientId;
+  private String clientId;
 
   @OneToMany(mappedBy = "account", cascade = REMOVE)
   List<MovementEntity> movements;

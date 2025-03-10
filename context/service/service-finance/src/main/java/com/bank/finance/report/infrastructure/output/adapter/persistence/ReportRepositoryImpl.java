@@ -1,5 +1,6 @@
 package com.bank.finance.report.infrastructure.output.adapter.persistence;
 
+import com.bank.finance.client.domain.model.ClientDomain;
 import com.bank.finance.report.application.port.output.ReportOutputPort;
 import com.bank.finance.report.domain.model.AccountStatement;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ public class ReportRepositoryImpl implements ReportOutputPort {
     private final ReportJpaRepository repository;
 
     @Override
-    public List<AccountStatement> getAccountStatement(Long client, LocalDate start, LocalDate end) {
-        return repository.getAccountStatement(client, start, end);
+    public List<AccountStatement> getAccountStatement(String clientName, LocalDate start, LocalDate end) {
+        return repository.getAccountStatement(clientName, start, end);
     }
 }

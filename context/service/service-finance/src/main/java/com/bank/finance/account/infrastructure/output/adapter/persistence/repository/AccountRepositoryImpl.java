@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -34,13 +35,19 @@ public class AccountRepositoryImpl implements AccountOutputPort {
   }
 
   @Override
-  @CachePut(value = CACHE_NAME, key = "#result.id")
+  @Caching(
+      put = {@CachePut(value = CACHE_NAME, key = "#result.id")},
+      evict = {@CacheEvict(value = CACHE_NAME, key = "'all'")})
   public AccountDomain save(AccountDomain accountDomain) {
     return mapper.toDomain(repository.save(mapper.toEntity(accountDomain)));
   }
 
   @Override
-  @CacheEvict(value = CACHE_NAME, key = "#id", allEntries = true)
+  @Caching(
+      evict = {
+        @CacheEvict(value = CACHE_NAME, key = "#id"),
+        @CacheEvict(value = CACHE_NAME, key = "'all'")
+      })
   public void deleteById(Long id) {
     repository.deleteById(id);
   }
